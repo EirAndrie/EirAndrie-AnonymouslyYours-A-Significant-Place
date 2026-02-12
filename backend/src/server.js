@@ -4,34 +4,39 @@ import path from "path";
 import connectDB from "./config/db.js";
 import PlaceRoutes from "./routes/PlaceRoutes.js";
 import cors from "cors";
-dotenv.config();
-
 import { fileURLToPath } from "url";
 
-const app = express();
-const PORT = process.env.PORT || 4000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Explicitly load .env from the backend directory
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
 // Middleware for frontend and backend connection
-app.use(
-  cors({
-    origin: process.env.FR_ORIGIN || "*",
-    credentials: true,
-  }),
-);
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    cors({
+      origin: process.env.FR_ORIGIN || "*",
+      credentials: true,
+    }),
+  );
+}
 
 app.use(express.json());
 app.use("/", PlaceRoutes);
 
-// Fix for favicon.ico requests
-app.get("/favicon.ico", (req, res) => res.status(204).end());
-
 if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(__dirname, "../../frontend/dist");
   app.use(express.static(frontendPath));
-  app.get("*", (req, res) => {
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running...");
   });
 }
 
