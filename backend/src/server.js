@@ -28,15 +28,10 @@ app.use("/", PlaceRoutes);
 app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 if (process.env.NODE_ENV === "production") {
-  // Path points to root/frontend/dist from backend/src
   const frontendPath = path.join(__dirname, "../../frontend/dist");
   app.use(express.static(frontendPath));
-  app.get("*/", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running...");
   });
 }
 
