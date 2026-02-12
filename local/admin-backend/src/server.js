@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(
   // Cross origin for frontend and backend
   cors({
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     credentials: true,
   }),
 );
