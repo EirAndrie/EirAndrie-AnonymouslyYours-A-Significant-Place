@@ -23,11 +23,11 @@ const FeedItem = ({ item }) => {
   return (
     <div className="bg-white p-4 pb-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] max-w-3xl mx-auto mb-10 rounded-sm">
       {/* Image Container */}
-      <div className="w-full aspect-[4/3] bg-gray-100 mb-6 overflow-hidden">
+      <div className="w-full bg-gray-100 mb-6 overflow-hidden">
         <img
           src={item.imageURL}
           alt="Post"
-          className="w-full h-full object-cover"
+          className="w-full h-auto object-contain max-h-[70vh] block mx-auto"
         />
       </div>
 
@@ -131,7 +131,10 @@ const FeedPage = () => {
       {/* Header */}
       <header className="sticky top-0 bg-white border-b border-gray-100 px-4 md:px-40 py-4 flex justify-between items-center shadow-sm">
         {/* Logo - Using a cursive font style to match 'Anonymously Yours' */}
-        <div className="text-2xl font-bold tracking-tight font-cursive cursor-default">
+        <div
+          onClick={() => navigate("/")}
+          className="text-2xl font-bold tracking-tight font-cursive cursor-pointer"
+        >
           Anonymously Yours
         </div>
 
