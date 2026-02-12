@@ -138,17 +138,17 @@ const ShareMomentModal = ({ isOpen, onClose, onPostSuccess }) => {
     >
       {/* 2. Modal Container */}
       <div
-        className="bg-white rounded-sm shadow-xl w-full max-w-xl overflow-hidden"
+        className="bg-white rounded-sm shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto"
         onClick={handleModalClick}
       >
-        <div className="p-8">
+        <div className="p-6 md:p-8">
           {/* Header */}
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             Share your Moment
           </h2>
 
           {/* Form Fields */}
-          <form className="space-y-6">
+          <form className="space-y-4 md:space-y-6">
             {/* Image Upload Area */}
             <div>
               <span className="block text-sm font-semibold text-gray-800 mb-2">
